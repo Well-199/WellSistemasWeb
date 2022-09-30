@@ -14,11 +14,12 @@ server.engine('mustache', mustache())
 
 server.use(express.static(path.join(__dirname, 'public')))
 
+server.use(express.urlencoded({ extended: false }))
+
 server.use(routes)
 
 server.use((req, res) => {
-    res.status(404)
-    res.send({message: 'url não encontrada'})
+    res.status(404).send('Página não encontrada')
 })
 
 server.listen(process.env.PORT, () => {
